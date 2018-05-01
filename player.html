@@ -37,23 +37,6 @@
         event => {
             console.log(event);
         });
-
-    const MyCastQueue = class extends cast.framework.QueueBase {
-        initialize(loadRequestData) {
-            const media = loadRequestData.media;
-            const items = [];
-            items.push(myCreateItem(media)); // your custom function logic
-
-            const queueData = new cast.framework.messages.QueueData();
-            queueData.items = items;
-
-            return queueData;
-        }
-
-        nextItems(itemId) {
-           return []; // your custom function logic
-        }
-    };
     
     // Update playback config licenseUrl according to provided value in load request.
     playerManager.setMediaPlaybackInfoHandler((loadRequest, playbackConfig) => {
@@ -69,9 +52,7 @@
     // media contents buffered. Default is 10.
     playbackConfig.autoResumeDuration = 5;
 
-    const myCastQueue = new MyCastQueue(); // create instance of queue Object
-
-    context.start({queue: myCastQueue, playbackConfig: playbackConfig});
+    context.start({playbackConfig: playbackConfig});
   </script>
 </body>
 </html>
